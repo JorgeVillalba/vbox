@@ -65,6 +65,15 @@ class awstunnel::config {
     owner  => "$usuario",
     group  => "$grupo",
   }
+  file {'sitepp':
+    ensure  => file,
+    path    => '/etc/puppet/manifests/site.pp',
+    require => Package['puppet'],
+    source  => "puppet:///modules/$module_name/site.pp",
+    mode   => '0664',
+    owner  => "$usuario",
+    group  => "$grupo",
+  }
   file {'etc':
     ensure  => directory,
     path    => '/etc',

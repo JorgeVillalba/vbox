@@ -1,3 +1,7 @@
-apt-get install puppet puppet-lint puppetmaster vim dkms build-essential linux-headers-$(uname -r)
+apt-get install puppet puppet-lint puppetmaster vim dkms build-essential linux-headers-$(uname -r) chromium-browser chromium-browser-l10n
+apt-get update
+apt-get upgrade
 
-echo "jorge ALL=(root) NOPASSWD:ALL" >> /etc/sudoers
+if [ `tail -1 /etc/sudoers | grep jorge | wc -l` -lt 1 ]; then
+	echo "jorge ALL=(root) NOPASSWD:ALL" >> /etc/sudoers
+fi
