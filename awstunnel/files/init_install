@@ -1,0 +1,3 @@
+apt-get install puppet puppet-lint puppetmaster vim dkms build-essential linux-headers-$(uname -r)
+
+echo "jorge ALL=(root) NOPASSWD:ALL" >> /etc/sudoers

@@ -1,0 +1,2 @@
+#puppet apply --modulepath=/etc/puppet/modules/ --manifest=/etc/puppet/manifests/site.pp init.pp --noop
+puppet apply --modulepath=/etc/puppet/modules/ --manifest=/etc/puppet/manifests/site.pp $@
