@@ -70,9 +70,9 @@ class awstunnel::config {
     path    => '/etc/puppet/manifests/site.pp',
     require => Package['puppet'],
     source  => "puppet:///modules/$module_name/site.pp",
-    mode   => '0664',
-    owner  => "$usuario",
-    group  => "$grupo",
+    mode    => '0664',
+    owner   => "$usuario",
+    group   => "$grupo",
   }
   file {'etc':
     ensure  => directory,
