@@ -1,7 +1,11 @@
-apt-get install puppet puppet-lint puppetmaster vim dkms build-essential linux-headers-$(uname -r) chromium-browser chromium-browser-l10n
+apt-get install puppet puppet-lint puppetmaster vim dkms build-essential linux-headers-$(uname -r) chromium-browser chromium-browser-l10n sed gsettings-desktop-schemas
 apt-get update
 apt-get upgrade
 
 if [ `tail -1 /etc/sudoers | grep jorge | wc -l` -lt 1 ]; then
 	echo "jorge ALL=(root) NOPASSWD:ALL" >> /etc/sudoers
 fi
+
+wget -A tar,xz -O tsetup.tar.xz https://tdesktop.com/linux
+sudo tar -xvpf tsetup*.xz -C /opt/
+/opt/Telegram/Telegram
