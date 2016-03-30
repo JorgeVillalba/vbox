@@ -133,6 +133,7 @@ start() {
   echo 'export SOCKS_PROXY=\"socks://'\${LHOST}':'\${LPORT}'\";' >> \${HOME}/.bashrc
   echo 'export SOCKS_PROXY=\"socks://'\${LHOST}':'\${LPORT}'\";' >> \${HOME}/.bash_profile
   sudo gsettings set org.gnome.system.proxy use-same-proxy false
+  sudo gsettings set org.gnome.system.proxy mode 'manual'
   sudo gsettings set org.gnome.system.proxy.http enabled true
   sudo gsettings set org.gnome.system.proxy.http host \"''\"
   sudo gsettings set org.gnome.system.proxy.http port \"0\"
