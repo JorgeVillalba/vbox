@@ -1,6 +1,13 @@
 # Submódulo de configuraciones
 class awstunnel::config {
   # Configuraciones
+  file {'dconf':
+    ensure => directory,
+    path   => "$awstunnel::params::homeusuario/.cache/dconf",
+    mode   => '0755',
+    owner  => "$awstunnel::params::usuario",
+    group  => "$awstunnel::params::grupo",
+  }
   file {'configuser':
     ensure => directory,
     path   => "$awstunnel::params::confuser",
@@ -125,17 +132,16 @@ start() {
   sudo -u root echo 'Acquire::Socks::Proxy \"socks://'\${LHOST}':'\${LPORT}'/\";' > \${PRXSYSCONF}
   echo 'export SOCKS_PROXY=\"socks://'\${LHOST}':'\${LPORT}'\";' >> \${HOME}/.bashrc
   echo 'export SOCKS_PROXY=\"socks://'\${LHOST}':'\${LPORT}'\";' >> \${HOME}/.bash_profile
-  gsettings set org.gnome.system.proxy use-same-proxy false
-  gsettings set org.gnome.system.proxy.http enabled true
-  gsettings set org.gnome.system.proxy.http host \"''\"
-  gsettings set org.gnome.system.proxy.http port \"0\"
-  gsettings set org.gnome.system.proxy.https host \"''\"
-  gsettings set org.gnome.system.proxy.https port \"0\"
-  gsettings set org.gnome.system.proxy.socks host \"'\${LHOST}'\"
-  gsettings set org.gnome.system.proxy.socks port \"\${LPORT}\"
-  gsettings set org.gnome.system.proxy.ftp host \"''\"
-  gsettings set org.gnome.system.proxy.ftp port \"0\"
-
+  sudo gsettings set org.gnome.system.proxy use-same-proxy false
+  sudo gsettings set org.gnome.system.proxy.http enabled true
+  sudo gsettings set org.gnome.system.proxy.http host \"''\"
+  sudo gsettings set org.gnome.system.proxy.http port \"0\"
+  sudo gsettings set org.gnome.system.proxy.https host \"''\"
+  sudo gsettings set org.gnome.system.proxy.https port \"0\"
+  sudo gsettings set org.gnome.system.proxy.socks host \"'\${LHOST}'\"
+  sudo gsettings set org.gnome.system.proxy.socks port \"\${LPORT}\"
+  sudo gsettings set org.gnome.system.proxy.ftp host \"''\"
+  sudo gsettings set org.gnome.system.proxy.ftp port \"0\"
 }
 
 stop() {
@@ -143,16 +149,16 @@ stop() {
   if [ -f \${PRXSYSCONF} ]; then
     sudo -u root echo \"\" > \${PRXSYSCONF}
   fi
-  if [[ -f \$HOME/.bash_profile ]]; then
-    sed -i '/proxy|PROXY|Proxy/d' ~/.bash_profile
+  if [ -f \$HOME/.bash_profile ]; then
+    sed -i '/[Pp][Rr][Oo][Xx][Yy]/d' \${HOME}/.bash_profile
   fi
-  if [[ -f \$HOME/.bashrc ]]; then
-    sed -i '/proxy|PROXY|Proxy/d' ~/.bashrc
+  if [ -f \$HOME/.bashrc ]; then
+    sed -i '/[Pp][Rr][Oo][Xx][Yy]/d' \${HOME}/.bashrc
   fi
-  gsettings set org.gnome.system.proxy mode 'none'
-  gsettings set org.gnome.system.proxy.http use-authentication false
-  gsettings set org.gnome.system.proxy.http authentication-user \"''\"
-  gsettings set org.gnome.system.proxy.http authentication-password \"''\"
+  sudo gsettings set org.gnome.system.proxy mode 'none'
+  sudo gsettings set org.gnome.system.proxy.http use-authentication false
+  sudo gsettings set org.gnome.system.proxy.http authentication-user \"''\"
+  sudo gsettings set org.gnome.system.proxy.http authentication-password \"''\"
 
 }
 
