@@ -1,4 +1,5 @@
-apt-get install puppet puppet-lint puppetmaster vim dkms build-essential linux-headers-$(uname -r) chromium-browser chromium-browser-l10n sed gsettings-desktop-schemas
+sudo apt-get install puppet puppet-lint puppetmaster vim dkms build-essential linux-headers-$(uname -r) chromium-browser chromium-browser-l10n sed gsettings-desktop-schemas vlc
+sudo apt-get install gnome gnome-shell gnome-shell-common gnome-shell-extensions
 apt-get update
 apt-get upgrade
 
@@ -6,6 +7,14 @@ if [ `tail -1 /etc/sudoers | grep jorge | wc -l` -lt 1 ]; then
 	echo "jorge ALL=(root) NOPASSWD:ALL" >> /etc/sudoers
 fi
 
+sudo rm -f /etc/fonts/conf.d/10-scale-bitmap-fonts.conf
+echo "export NO_AT_BRIDGE=1" >> /etc/environment
+
 wget -A tar,xz -O tsetup.tar.xz https://tdesktop.com/linux
 sudo tar -xvpf tsetup*.xz -C /opt/
 /opt/Telegram/Telegram
+
+sudo gsettings set org.gnome.desktop.interface clock-show-date true
+sudo gsettings set org.gnome.shell.clock show-date true
+
+#sudo gsettings set com.canonical.Unity.Launcher favorites ['application://putty.desktop', 'application://gnome-terminal.desktop', 'application://nautilus.desktop', 'application://chromium-browser.desktop', 'application://firefox.desktop', 'application://libreoffice-writer.desktop', 'application://libreoffice-calc.desktop', 'application://libreoffice-impress.desktop', 'application://ubuntu-software-center.desktop', 'application://ubuntu-amazon-default.desktop', 'application://unity-control-center.desktop', 'unity://running-apps', 'unity://desktop-icon', 'application://telegram.desktop', 'unity://expo-icon', 'unity://devices']
